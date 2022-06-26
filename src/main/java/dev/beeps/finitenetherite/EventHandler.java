@@ -27,13 +27,14 @@ public class EventHandler implements Listener {
     }
 
     @org.bukkit.event.EventHandler(ignoreCancelled = true)
-    public void onPlayerItemMend(PlayerItemMendEvent event) {
+    public void onPlayerItemMend(PlayerItemMendEvent event){
 
         // Make mending not work on netherite
         if(itemMap.get(event.getItem().getType()) != null){
-            event.setCancelled(true);
+            if(event.getItem().getEnchantmentLevel(MENDING) < 2){
+                event.setCancelled(true);
+            }
         }
-
     }
 
     @org.bukkit.event.EventHandler(ignoreCancelled = true)
